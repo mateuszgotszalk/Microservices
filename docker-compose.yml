@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+  mysql:
+    container_name: test_mysql5
+    image: mysql:5.7
+    ports:
+      - 1234:3306
+    environment: 
+      - MYSQL_ROOT_PASSWORD=pass
+      - MYSQL_DATABASE=database
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=pass
+    restart: always
