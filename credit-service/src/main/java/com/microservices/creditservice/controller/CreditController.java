@@ -7,8 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,13 +47,46 @@ public class CreditController {
     }
 
     @GetMapping(path = "/getCredits")
-    public @ResponseBody List<Credit> getCredits(){
+    public @ResponseBody List<CreditOutputForm> getCredits(){
         List<Credit> credits = (List<Credit>)creditRepository.findAll();
-        List<String> ids = credits.stream()
-                .map(credit -> (credit.getId()+""))
+        List<Integer> ids = credits.stream()
+                .map(credit -> (credit.getId()))
                 .collect(Collectors.toList());
-        restTemplate.postForObject("http://localhost:3303/getProducts", ids, List.class);
 
-        return (List<Credit>)creditRepository.findAll();
+
+        ProductList productList = restTemplate.postForObject
+                ("http://localhost:3303/getProducts", ids, ProductList.class);
+
+        CustomerList customerList = restTemplate.postForObject
+                ("http://localhost:3302/getCustomers", ids, CustomerList.class);
+
+        List<CreditOutputForm> finalList = credits.stream()
+                .map(credit -> {
+                    CreditOutputForm creditOutputForm = new CreditOutputForm();
+                    creditOutputForm.setId(credit.getId());
+                    creditOutputForm.setCreditName(credit.getCreditName());
+                    return creditOutputForm;
+                }).collect(Collectors.toList());
+
+        for (CreditOutputForm item: finalList){
+           int idCredit = item.getId();
+           for (Product product: productList.getProducts()){
+               if(product.getCreditId().equals(idCredit)){
+                   item.setProductName(product.getProductName());
+                   item.setProductValue(product.getProductValue());
+                   break;
+               }
+           }
+            for (Customer customer: customerList.getCustomers()) {
+                if(customer.getCreditId().equals(idCredit)){
+                    item.setFirstName(customer.getFirstName());
+                    item.setSurName(customer.getSurName());
+                    item.setPesel(customer.getPesel());
+                    break;
+                }
+            }
+        }
+
+        return finalList;
     }
 }
