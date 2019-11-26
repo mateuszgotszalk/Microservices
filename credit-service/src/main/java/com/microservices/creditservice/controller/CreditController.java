@@ -19,10 +19,11 @@ public class CreditController {
     @Autowired
     private CreditRepository creditRepository;
 
+    private CreditList creditList;
+
 
     @RequestMapping(path = "/createCredit")
     public int createCredit(@RequestBody CreditInputForm creditInputForm){
-
 
         Credit credit = new Credit();
         credit.setCreditName(creditInputForm.getCreditName());
@@ -48,11 +49,14 @@ public class CreditController {
 
     @GetMapping(path = "/getCredits")
     public @ResponseBody List<CreditOutputForm> getCredits(){
-        List<Credit> credits = (List<Credit>)creditRepository.findAll();
-        List<Integer> ids = credits.stream()
-                .map(credit -> (credit.getId()))
-                .collect(Collectors.toList());
 
+        creditList = new CreditList.Builder()
+                .credits((List<Credit>)creditRepository.findAll())
+                .build();
+
+        List<Integer> ids = creditList.getCredits().stream()
+                .map(Credit::getId)
+                .collect(Collectors.toList());
 
         ProductList productList = restTemplate.postForObject
                 ("http://localhost:3303/getProducts", ids, ProductList.class);
@@ -60,7 +64,7 @@ public class CreditController {
         CustomerList customerList = restTemplate.postForObject
                 ("http://localhost:3302/getCustomers", ids, CustomerList.class);
 
-        List<CreditOutputForm> finalList = credits.stream()
+        /*credits.stream()
                 .map(credit -> {
                     CreditOutputForm creditOutputForm = new CreditOutputForm();
                     creditOutputForm.setId(credit.getId());
@@ -85,8 +89,9 @@ public class CreditController {
                     break;
                 }
             }
-        }
+        }*/
 
-        return finalList;
+        return MergeModels
+                .setFinalList(creditList, productList, customerList);
     }
 }

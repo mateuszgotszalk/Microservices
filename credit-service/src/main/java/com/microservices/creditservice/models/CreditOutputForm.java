@@ -2,13 +2,15 @@ package com.microservices.creditservice.models;
 
 public class CreditOutputForm {
 
+    private Integer id;
+    private String creditName;
     private String firstName;
     private String surName;
     private String pesel;
     private String productName;
     private int productValue;
-    private String creditName;
-    private Integer id;
+
+
 
     public String getFirstName() {
         return firstName;

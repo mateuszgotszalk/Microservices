@@ -7,32 +7,33 @@ public class Customer {
     private String pesel;
     private Integer creditId;
 
+
     public String getFirstName() {
         return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public String getSurName() {
         return surName;
     }
 
-    public void setSurName(String surName) {
-        this.surName = surName;
-    }
-
     public String getPesel() {
-        return this.pesel;
-    }
-
-    public void setPesel(String pesel) {
-        this.pesel = pesel;
+        return pesel;
     }
 
     public Integer getCreditId() {
         return creditId;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setSurName(String surName) {
+        this.surName = surName;
+    }
+
+    public void setPesel(String pesel) {
+        this.pesel = pesel;
     }
 
     public void setCreditId(Integer creditId) {
