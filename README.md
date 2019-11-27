@@ -25,14 +25,14 @@ I Uruchomienie kontenerów:
   
     (ip maszyny):3301/createCredits :
 
-  {
+  	{
 	"firstName": "Maja2",
 	"surName": "Smerf2",
 	"pesel": "9204055122",
 	"productName": "DomJednorodzinny5",
 	"productValue": 560000,
 	"creditName": "NaDomJednorodzinny5"
-  }
+  	}
   
   Odpowiedź: 18
   
