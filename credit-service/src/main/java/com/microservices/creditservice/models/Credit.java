@@ -5,9 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/* A simple model of credit writing to database*/
 @Entity
 public class Credit {
 
+/* These two annotations tells Spring's this is a primary key with autoincrementation*/
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;

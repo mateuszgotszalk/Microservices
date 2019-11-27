@@ -1,5 +1,7 @@
 package com.microservices.creditservice.models;
 
+
+// This is a model, which come from client to create a new credit
 public class CreditInputForm {
 
     private String firstName;

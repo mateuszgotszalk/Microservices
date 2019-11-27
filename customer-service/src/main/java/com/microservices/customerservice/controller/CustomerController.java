@@ -19,17 +19,19 @@ public class CustomerController {
 
     private CustomerList customerList = new CustomerList();
 
+    // writing a customer to database
     @RequestMapping(path = "/createCustomer")
     public void createCustomer(@RequestBody Customer customer){
         customerRepository.save(customer);
     }
 
+    // method returns all customers from database with ids from list
     @RequestMapping(path = "/getCustomers")
     public CustomerList getProducts(@RequestBody List<Integer> list){
-        List<Customer> products = list.stream()
+        List<Customer> customers = list.stream()
                 .map(integer -> customerRepository.findByCreditId(integer))
                 .collect(Collectors.toList());
-        customerList.setCustomers(products);
+        customerList.setCustomers(customers);
         return customerList;
     }
 }

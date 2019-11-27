@@ -1,7 +1,7 @@
 package com.microservices.customerservice.models;
 
 import javax.persistence.*;
-
+/* A simple model of credit writing to database*/
 @Entity
 public class Customer {
 
@@ -9,6 +9,7 @@ public class Customer {
     private String firstName;
     private String surName;
 
+    /* This annotation tells Spring's this is a primary key for Customer*/
     @Id
     private String pesel;
 

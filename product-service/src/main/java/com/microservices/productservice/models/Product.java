@@ -7,9 +7,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
+/* A simple model of credit writing to database*/
 @Entity
 public class Product {
 
+
+    /* This annotation tells Spring's this is a primary key for Product*/
     @Id
     private String productName;
     private int productValue;

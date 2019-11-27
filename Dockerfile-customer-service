@@ -1,0 +1,9 @@
+FROM maven:3.6.2-jdk-11
+
+ADD ./customer-service .
+
+EXPOSE 3302
+
+RUN mvn clean package
+
+ENTRYPOINT ["java", "-jar", "/target/customer-service-0.0.1-SNAPSHOT.jar"]

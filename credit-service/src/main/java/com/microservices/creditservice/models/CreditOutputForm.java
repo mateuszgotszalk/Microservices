@@ -1,5 +1,6 @@
 package com.microservices.creditservice.models;
 
+// This is a model, which shows a credit with product and customer details
 public class CreditOutputForm {
 
     private Integer id;

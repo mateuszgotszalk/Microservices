@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class CreditServiceApplication {
 
+
 	public static void main(String[] args) {
 		SpringApplication.run(CreditServiceApplication.class, args);
 	}

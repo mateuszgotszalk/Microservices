@@ -5,6 +5,11 @@ import java.util.stream.Collectors;
 
 public class MergeModels {
 
+    /* This method take a credit list, product lists and customers lists
+    * and return a list of credits with their customers and products
+    * First adding credit to new list.
+    * Second looking for customer and prodduct with the same credits id,
+    * if It founds them, then add to credit.*/
     public static List<CreditOutputForm> setFinalList(CreditList credits, ProductList productList, CustomerList customerList){
 
         List<CreditOutputForm> finalList = credits.getCredits().stream()
@@ -24,6 +29,7 @@ public class MergeModels {
                     break;
                 }
             }
+
             for (Customer customer: customerList.getCustomers()) {
                 if(customer.getCreditId().equals(idCredit)){
                     item.setFirstName(customer.getFirstName());

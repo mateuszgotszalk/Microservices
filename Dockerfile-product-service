@@ -1,0 +1,9 @@
+FROM maven:3.6.2-jdk-11
+
+ADD ./product-service .
+
+EXPOSE 3303
+
+RUN mvn clean package
+
+ENTRYPOINT ["java", "-jar", "/target/product-service-0.0.1-SNAPSHOT.jar"]
