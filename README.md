@@ -1,5 +1,5 @@
 # Microservice
-Projekt Mikroserwisu jako wykonanie zadania
+Projekt Mikroserwisu
 
 I Uruchomienie kontenerów:
   1. Uruchomić terminal w folderze z projektami i plikami docker. 
