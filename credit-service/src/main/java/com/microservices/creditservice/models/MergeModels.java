@@ -10,7 +10,9 @@ public class MergeModels {
     * First adding credit to new list.
     * Second looking for customer and prodduct with the same credits id,
     * if It founds them, then add to credit.*/
-    public static List<CreditOutputForm> setFinalList(CreditList credits, ProductList productList, CustomerList customerList){
+    public static List<CreditOutputForm> setFinalList(CreditList credits,
+                                                      ProductList productList,
+                                                      CustomerList customerList){
 
         List<CreditOutputForm> finalList = credits.getCredits().stream()
                 .map(credit -> {

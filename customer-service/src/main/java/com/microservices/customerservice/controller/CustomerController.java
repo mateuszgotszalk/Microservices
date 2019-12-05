@@ -14,8 +14,12 @@ import java.util.stream.Collectors;
 @RestController
 public class CustomerController {
 
+    private final CustomerRepository customerRepository;
+
     @Autowired
-    private CustomerRepository customerRepository;
+    public CustomerController(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     private CustomerList customerList = new CustomerList();
 
@@ -27,9 +31,9 @@ public class CustomerController {
 
     // method returns all customers from database with ids from list
     @RequestMapping(path = "/getCustomers")
-    public CustomerList getProducts(@RequestBody List<Integer> list){
+    public CustomerList getCustomers(@RequestBody List<Integer> list){
         List<Customer> customers = list.stream()
-                .map(integer -> customerRepository.findByCreditId(integer))
+                .map(customerRepository::findByCreditId)
                 .collect(Collectors.toList());
         customerList.setCustomers(customers);
         return customerList;

@@ -20,13 +20,11 @@ public class ProductController {
         this.productRepository = productRepository;
     }
 
-
     // writing a product to database
     @RequestMapping(path = "/createProduct")
     public void createProduct(@RequestBody Product product){
         productRepository.save(product);
     }
-
 
     // method returns all products from database with ids from list
     @RequestMapping(path = "/getProducts")

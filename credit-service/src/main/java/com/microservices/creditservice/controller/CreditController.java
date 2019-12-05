@@ -50,10 +50,8 @@ public class CreditController {
         // sending product
         restTemplate.postForObject("http://productservice:3303/createProduct", product, Product.class);
 
-
         return credit.getId();
     }
-
 
     // method return credits with customers and product as a list
     @GetMapping(path = "/getCredits")
