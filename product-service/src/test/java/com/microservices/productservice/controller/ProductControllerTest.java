@@ -36,7 +36,6 @@ public class ProductControllerTest {
 
     @Test
     public void getProductsTest() {
-
         List<Integer> ids = Arrays.asList(1,2,3);
 
         ProductList productList = mockController.getProducts(ids);

@@ -15,9 +15,11 @@ public class MergeModelsTest {
     @Test
     public void setFinalListTest() {
 
+        //when
         Credit credit = new Credit();
         credit.setId(1);
         credit.setCreditName("Test12" + credit.getId());
+
 
         Product product = new Product();
         product.setCreditId(1);
@@ -41,9 +43,10 @@ public class MergeModelsTest {
         CustomerList customerList = new CustomerList();
         customerList.setCustomers(Arrays.asList(customer));
 
+        //given
         List<CreditOutputForm> form = MergeModels.setFinalList(creditList, productList, customerList);
 
-
+        //then
         Assert.assertEquals(form.size(),1);
         Assert.assertEquals(form.get(0).getProductName(), "productName1");
         Assert.assertEquals(form.get(0).getFirstName(), "FirstName1");
