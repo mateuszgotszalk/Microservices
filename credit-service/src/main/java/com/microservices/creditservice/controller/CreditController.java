@@ -83,18 +83,14 @@ public class CreditController {
     @GetMapping(path = "/getCredits")
     public @ResponseBody ResponseEntity<List<CreditOutputForm>> getCredits(){
 
-        CreditList creditList=null;
-        ProductList productList = null;
-        CustomerList customerList= null;
+        CreditList creditList;
+        ProductList productList;
+        CustomerList customerList;
 
         //downloading credits from database
-        //try {
             creditList = new CreditList.Builder()
                     .credits((List<Credit>) creditRepository.findAll())
                     .build();
-        /*}catch (RuntimeException e){
-            System.out.println(e.getMessage());
-        }*/
 
         // making a list of credit ids
         List<Integer> ids = creditList.getCredits().stream()
@@ -102,22 +98,13 @@ public class CreditController {
                 .collect(Collectors.toList());
 
         //sending a list of ids and return a list of products
-//        try {
             productList = restTemplate.postForObject
                     ("http://productservice:3303/getProducts", ids, ProductList.class);
-        /*}catch (Exception e){
-            e.printStackTrace();
-            System.out.println("Something goes wrong with product service");
-        }*/
 
-        //try {
         //sending a list of ids and return a list of customers
         customerList = restTemplate.postForObject
                 ("http://customerservice:3302/getCustomers", ids, CustomerList.class);
-        /*}catch (Exception e){
-            e.printStackTrace();
-            System.out.println("Something goes wrong with customer service");
-        }*/
+
 
         // return a list of merge credits with customers and products
         return Optional.of(ResponseEntity
