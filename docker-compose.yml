@@ -1,11 +1,11 @@
 version: '3.5'
 
 services:
-  mysql:
-    container_name: db
+  databasemysql:
+    container_name: db12
     image: mysql:5.7
     ports:
-      - 1234:1234
+      - 1234:3306
     environment: 
       - MYSQL_ROOT_PASSWORD=pass
       - MYSQL_DATABASE=database
@@ -13,7 +13,7 @@ services:
       - MYSQL_PASSWORD=pass
     restart: always
     networks: 
-      - backend
+      - microservices
   productservice:
     container_name: productService
     build:
@@ -21,10 +21,10 @@ services:
       dockerfile: ./Dockerfile-product-service
     ports:
       - 3303:3303
-    networks:
-      - backend
+    networks: 
+      - microservices
     depends_on:
-      - mysql
+      - databasemysql
   customerservice:
     container_name: customerService
     build:
@@ -32,10 +32,10 @@ services:
        dockerfile: ./Dockerfile-customer-service
     ports:
       - 3302:3302
-    networks:
-      - backend
+    networks: 
+      - microservices
     depends_on:
-      - mysql
+      - databasemysql
   creditservice:
     container_name: creditService
     build:
@@ -43,11 +43,11 @@ services:
       dockerfile: ./Dockerfile-credit-service
     ports:
      - 3301:3301
-    networks:
-     - backend
+    networks: 
+     - microservices
     depends_on:
-     - mysql
-            
-networks:
-    backend:
-      driver: bridge
+     - databasemysql
+
+networks: 
+  microservices:
+    driver: bridge
